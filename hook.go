@@ -63,6 +63,8 @@ func copyEntry(e *logrus.Entry, fields logrus.Fields) *logrus.Entry {
 	ne.Message = e.Message
 	ne.Level = e.Level
 	ne.Time = e.Time
+	ne.Logger = e.Logger
+	ne.Caller = e.Caller
 	ne.Data = logrus.Fields{}
 	for k, v := range fields {
 		ne.Data[k] = v
@@ -93,6 +95,8 @@ var (
 	logstashFieldMap = logrus.FieldMap{
 		logrus.FieldKeyTime: "@timestamp",
 		logrus.FieldKeyMsg:  "message",
+		logrus.FieldKeyFunc: "function",
+		logrus.FieldKeyFile: "file",
 	}
 )
 
